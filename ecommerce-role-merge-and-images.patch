@@ -1,0 +1,1020 @@
+diff --git a/admin-dashboard/DEPRECATED.md b/admin-dashboard/DEPRECATED.md
+new file mode 100644
+index 0000000..a134b7e
+--- /dev/null
++++ b/admin-dashboard/DEPRECATED.md
+@@ -0,0 +1,14 @@
++# Deprecated
++
++This standalone app is no longer used. Admin, seller, and delivery access has
++been merged into `web-app` as role-gated routes reachable from the single
++customer login page:
++
++- Admin dashboard: `web-app/app/admin`
++- Seller dashboard: `web-app/app/seller`
++- Delivery dashboard: `web-app/app/delivery`
++
++There is one login and one port (the web-app). After signing in, a user with
++the `admin`, `seller`, or `delivery` role is redirected automatically to
++their dashboard. This folder can be deleted once you've confirmed nothing
++else references it.
+diff --git a/backend/db-seeds/seed-categories.ts b/backend/db-seeds/seed-categories.ts
+index 0189e33..932958b 100644
+--- a/backend/db-seeds/seed-categories.ts
++++ b/backend/db-seeds/seed-categories.ts
+@@ -38,7 +38,7 @@ const TAXONOMY: CategorySeed[] = [
+     trending: true,
+     attributes: { vertical: 'fashion' },
+     icon: '👗',
+-    image_url: 'https://example.com/icons/fashion.png',
++    image_url: 'https://picsum.photos/seed/fashion/400/400',
+   },
+ 
+   // Fashion > Men
+@@ -50,40 +50,41 @@ const TAXONOMY: CategorySeed[] = [
+     featured: true,
+     trending: false,
+     icon: '🧥',
++    image_url: 'https://picsum.photos/seed/fashion-men/400/400',
+     attributes: { size: true, color: true, fabric: true, fit: true },
+   },
+-  { name: 'Topwear', slug: 'fashion-men-topwear', parentSlug: 'fashion-men', display_order: 1, icon: '👕', attributes: { sleeve: true, fit: true, fabric: true } },
+-  { name: 'T-Shirts', slug: 'fashion-men-tshirts', parentSlug: 'fashion-men-topwear', display_order: 1, icon: '👕', attributes: { fit: true, fabric: true, neck: true } },
+-  { name: 'Shirts', slug: 'fashion-men-shirts', parentSlug: 'fashion-men-topwear', display_order: 2, icon: '👔', attributes: { collar: true, fabric: true, fit: true } },
+-  { name: 'Jackets', slug: 'fashion-men-jackets', parentSlug: 'fashion-men-topwear', display_order: 3, icon: '🧥', attributes: { insulation: true, fabric: true } },
++  { name: 'Topwear', slug: 'fashion-men-topwear', parentSlug: 'fashion-men', display_order: 1, icon: '👕', image_url: 'https://picsum.photos/seed/fashion-men-topwear/400/400', attributes: { sleeve: true, fit: true, fabric: true } },
++  { name: 'T-Shirts', slug: 'fashion-men-tshirts', parentSlug: 'fashion-men-topwear', display_order: 1, icon: '👕', image_url: 'https://picsum.photos/seed/fashion-men-tshirts/400/400', attributes: { fit: true, fabric: true, neck: true } },
++  { name: 'Shirts', slug: 'fashion-men-shirts', parentSlug: 'fashion-men-topwear', display_order: 2, icon: '👔', image_url: 'https://picsum.photos/seed/fashion-men-shirts/400/400', attributes: { collar: true, fabric: true, fit: true } },
++  { name: 'Jackets', slug: 'fashion-men-jackets', parentSlug: 'fashion-men-topwear', display_order: 3, icon: '🧥', image_url: 'https://picsum.photos/seed/fashion-men-jackets/400/400', attributes: { insulation: true, fabric: true } },
+ 
+-  { name: 'Bottomwear', slug: 'fashion-men-bottomwear', parentSlug: 'fashion-men', display_order: 2, icon: '👖', attributes: { waist: true, length: true, fabric: true } },
+-  { name: 'Jeans', slug: 'fashion-men-jeans', parentSlug: 'fashion-men-bottomwear', display_order: 1, icon: '👖', attributes: { fit: true, wash: true } },
+-  { name: 'Trousers', slug: 'fashion-men-trousers', parentSlug: 'fashion-men-bottomwear', display_order: 2, icon: '🩳', attributes: { fit: true, fabric: true } },
+-  { name: 'Shorts', slug: 'fashion-men-shorts', parentSlug: 'fashion-men-bottomwear', display_order: 3, icon: '🩳', attributes: { length: true, fabric: true } },
++  { name: 'Bottomwear', slug: 'fashion-men-bottomwear', parentSlug: 'fashion-men', display_order: 2, icon: '👖', image_url: 'https://picsum.photos/seed/fashion-men-bottomwear/400/400', attributes: { waist: true, length: true, fabric: true } },
++  { name: 'Jeans', slug: 'fashion-men-jeans', parentSlug: 'fashion-men-bottomwear', display_order: 1, icon: '👖', image_url: 'https://picsum.photos/seed/fashion-men-jeans/400/400', attributes: { fit: true, wash: true } },
++  { name: 'Trousers', slug: 'fashion-men-trousers', parentSlug: 'fashion-men-bottomwear', display_order: 2, icon: '🩳', image_url: 'https://picsum.photos/seed/fashion-men-trousers/400/400', attributes: { fit: true, fabric: true } },
++  { name: 'Shorts', slug: 'fashion-men-shorts', parentSlug: 'fashion-men-bottomwear', display_order: 3, icon: '🩳', image_url: 'https://picsum.photos/seed/fashion-men-shorts/400/400', attributes: { length: true, fabric: true } },
+ 
+-  { name: 'Ethnic Wear', slug: 'fashion-men-ethnic-wear', parentSlug: 'fashion-men', display_order: 3, icon: '🪘', attributes: { fabric: true, work: true } },
+-  { name: 'Kurta Sets', slug: 'fashion-men-kurta-sets', parentSlug: 'fashion-men-ethnic-wear', display_order: 1, icon: '🧵', attributes: { embroidery: true, fabric: true } },
+-  { name: 'Kurtas', slug: 'fashion-men-kurtas', parentSlug: 'fashion-men-ethnic-wear', display_order: 2, icon: '🧥', attributes: { fabric: true, length: true } },
++  { name: 'Ethnic Wear', slug: 'fashion-men-ethnic-wear', parentSlug: 'fashion-men', display_order: 3, icon: '🪘', image_url: 'https://picsum.photos/seed/fashion-men-ethnic-wear/400/400', attributes: { fabric: true, work: true } },
++  { name: 'Kurta Sets', slug: 'fashion-men-kurta-sets', parentSlug: 'fashion-men-ethnic-wear', display_order: 1, icon: '🧵', image_url: 'https://picsum.photos/seed/fashion-men-kurta-sets/400/400', attributes: { embroidery: true, fabric: true } },
++  { name: 'Kurtas', slug: 'fashion-men-kurtas', parentSlug: 'fashion-men-ethnic-wear', display_order: 2, icon: '🧥', image_url: 'https://picsum.photos/seed/fashion-men-kurtas/400/400', attributes: { fabric: true, length: true } },
+ 
+   // Fashion > Women
+-  { name: 'Women', slug: 'fashion-women', parentSlug: 'fashion', display_order: 2, featured: true, icon: '👚', attributes: { size: true, color: true, fabric: true, fit: true } },
+-  { name: 'Topwear', slug: 'fashion-women-topwear', parentSlug: 'fashion-women', display_order: 1, icon: '👚', attributes: { sleeve: true, fit: true, fabric: true } },
+-  { name: 'Sarees', slug: 'fashion-women-sarees', parentSlug: 'fashion-women-topwear', display_order: 1, icon: '🧣', attributes: { fabric: true, weave: true } },
+-  { name: 'Kurtis', slug: 'fashion-women-kurtis', parentSlug: 'fashion-women-topwear', display_order: 2, icon: '🧵', attributes: { fabric: true, embroidery: true } },
+-  { name: 'Dresses', slug: 'fashion-women-dresses', parentSlug: 'fashion-women-topwear', display_order: 3, icon: '👗', attributes: { occasion: true, fabric: true, sleeve: true } },
++  { name: 'Women', slug: 'fashion-women', parentSlug: 'fashion', display_order: 2, featured: true, icon: '👚', image_url: 'https://picsum.photos/seed/fashion-women/400/400', attributes: { size: true, color: true, fabric: true, fit: true } },
++  { name: 'Topwear', slug: 'fashion-women-topwear', parentSlug: 'fashion-women', display_order: 1, icon: '👚', image_url: 'https://picsum.photos/seed/fashion-women-topwear/400/400', attributes: { sleeve: true, fit: true, fabric: true } },
++  { name: 'Sarees', slug: 'fashion-women-sarees', parentSlug: 'fashion-women-topwear', display_order: 1, icon: '🧣', image_url: 'https://picsum.photos/seed/fashion-women-sarees/400/400', attributes: { fabric: true, weave: true } },
++  { name: 'Kurtis', slug: 'fashion-women-kurtis', parentSlug: 'fashion-women-topwear', display_order: 2, icon: '🧵', image_url: 'https://picsum.photos/seed/fashion-women-kurtis/400/400', attributes: { fabric: true, embroidery: true } },
++  { name: 'Dresses', slug: 'fashion-women-dresses', parentSlug: 'fashion-women-topwear', display_order: 3, icon: '👗', image_url: 'https://picsum.photos/seed/fashion-women-dresses/400/400', attributes: { occasion: true, fabric: true, sleeve: true } },
+ 
+-  { name: 'Bottomwear', slug: 'fashion-women-bottomwear', parentSlug: 'fashion-women', display_order: 2, icon: '👖', attributes: { waist: true, length: true, fabric: true } },
+-  { name: 'Leggings', slug: 'fashion-women-leggings', parentSlug: 'fashion-women-bottomwear', display_order: 1, icon: '🧷', attributes: { fabric: true, stretch: true } },
+-  { name: 'Jeans', slug: 'fashion-women-jeans', parentSlug: 'fashion-women-bottomwear', display_order: 2, icon: '👖', attributes: { fit: true, wash: true } },
++  { name: 'Bottomwear', slug: 'fashion-women-bottomwear', parentSlug: 'fashion-women', display_order: 2, icon: '👖', image_url: 'https://picsum.photos/seed/fashion-women-bottomwear/400/400', attributes: { waist: true, length: true, fabric: true } },
++  { name: 'Leggings', slug: 'fashion-women-leggings', parentSlug: 'fashion-women-bottomwear', display_order: 1, icon: '🧷', image_url: 'https://picsum.photos/seed/fashion-women-leggings/400/400', attributes: { fabric: true, stretch: true } },
++  { name: 'Jeans', slug: 'fashion-women-jeans', parentSlug: 'fashion-women-bottomwear', display_order: 2, icon: '👖', image_url: 'https://picsum.photos/seed/fashion-women-jeans/400/400', attributes: { fit: true, wash: true } },
+ 
+-  { name: 'Ethnic Wear', slug: 'fashion-women-ethnic-wear', parentSlug: 'fashion-women', display_order: 3, icon: '🪡', attributes: { work: true, fabric: true } },
+-  { name: 'Lehengas', slug: 'fashion-women-lehengas', parentSlug: 'fashion-women-ethnic-wear', display_order: 1, icon: '👗', attributes: { work: true, fabric: true } },
++  { name: 'Ethnic Wear', slug: 'fashion-women-ethnic-wear', parentSlug: 'fashion-women', display_order: 3, icon: '🪡', image_url: 'https://picsum.photos/seed/fashion-women-ethnic-wear/400/400', attributes: { work: true, fabric: true } },
++  { name: 'Lehengas', slug: 'fashion-women-lehengas', parentSlug: 'fashion-women-ethnic-wear', display_order: 1, icon: '👗', image_url: 'https://picsum.photos/seed/fashion-women-lehengas/400/400', attributes: { work: true, fabric: true } },
+ 
+   // Fashion > Kids
+-  { name: 'Kids', slug: 'fashion-kids', parentSlug: 'fashion', display_order: 3, featured: false, icon: '🧒', attributes: { size: true, comfort: true } },
+-  { name: 'Clothing', slug: 'fashion-kids-clothing', parentSlug: 'fashion-kids', display_order: 1, icon: '🧸', attributes: { size: true, fabric: true, comfort: true } },
+-  { name: 'T-Shirts', slug: 'fashion-kids-tshirts', parentSlug: 'fashion-kids-clothing', display_order: 1, icon: '👕', attributes: { fabric: true, age: true } },
++  { name: 'Kids', slug: 'fashion-kids', parentSlug: 'fashion', display_order: 3, featured: false, icon: '🧒', image_url: 'https://picsum.photos/seed/fashion-kids/400/400', attributes: { size: true, comfort: true } },
++  { name: 'Clothing', slug: 'fashion-kids-clothing', parentSlug: 'fashion-kids', display_order: 1, icon: '🧸', image_url: 'https://picsum.photos/seed/fashion-kids-clothing/400/400', attributes: { size: true, fabric: true, comfort: true } },
++  { name: 'T-Shirts', slug: 'fashion-kids-tshirts', parentSlug: 'fashion-kids-clothing', display_order: 1, icon: '👕', image_url: 'https://picsum.photos/seed/fashion-kids-tshirts/400/400', attributes: { fabric: true, age: true } },
+ 
+   // Many more categories would be seeded here.
+   // For scaffolding/testing, expand this list to 150-200+ entries.
+@@ -97,12 +98,12 @@ const TAXONOMY: CategorySeed[] = [
+     featured: true,
+     trending: true,
+     icon: '📱',
+-    image_url: 'https://example.com/icons/electronics.png',
++    image_url: 'https://picsum.photos/seed/electronics/400/400',
+     attributes: { vertical: 'electronics' },
+   },
+-  { name: 'Mobiles & Accessories', slug: 'electronics-mobiles', parentSlug: 'electronics', display_order: 1, icon: '📱', attributes: { brand: true, storage: true, ram: true, warranty: true } },
+-  { name: 'Smartphones', slug: 'electronics-smartphones', parentSlug: 'electronics-mobiles', display_order: 1, icon: '📱', attributes: { ram: true, storage: true, warranty: true, os: true } },
+-  { name: 'Phone Covers', slug: 'electronics-covers', parentSlug: 'electronics-mobiles', display_order: 2, icon: '🛡️', attributes: { material: true, type: true } },
++  { name: 'Mobiles & Accessories', slug: 'electronics-mobiles', parentSlug: 'electronics', display_order: 1, icon: '📱', image_url: 'https://picsum.photos/seed/electronics-mobiles/400/400', attributes: { brand: true, storage: true, ram: true, warranty: true } },
++  { name: 'Smartphones', slug: 'electronics-smartphones', parentSlug: 'electronics-mobiles', display_order: 1, icon: '📱', image_url: 'https://picsum.photos/seed/electronics-smartphones/400/400', attributes: { ram: true, storage: true, warranty: true, os: true } },
++  { name: 'Phone Covers', slug: 'electronics-covers', parentSlug: 'electronics-mobiles', display_order: 2, icon: '🛡️', image_url: 'https://picsum.photos/seed/electronics-covers/400/400', attributes: { material: true, type: true } },
+ 
+   // ============ 12) Jewelry & Watches (top-level) ============
+   {
+@@ -113,11 +114,29 @@ const TAXONOMY: CategorySeed[] = [
+     featured: true,
+     trending: true,
+     icon: '💍',
+-    image_url: 'https://example.com/icons/jewelry.png',
++    image_url: 'https://picsum.photos/seed/jewelry-watches/400/400',
+     attributes: { vertical: 'jewelry' },
+   },
+-  { name: 'Watches', slug: 'jewelry-watches-watches', parentSlug: 'jewelry-watches', display_order: 1, icon: '⌚️', attributes: { dial_size: true, strap_material: true, warranty: true } },
+-  { name: 'Smart Watches', slug: 'jewelry-watches-smart-watches', parentSlug: 'jewelry-watches-watches', display_order: 1, icon: '⌚️', attributes: { sensor: true, battery_hours: true, warranty: true } },
++  { name: 'Watches', slug: 'jewelry-watches-watches', parentSlug: 'jewelry-watches', display_order: 1, icon: '⌚️', image_url: 'https://picsum.photos/seed/jewelry-watches-watches/400/400', attributes: { dial_size: true, strap_material: true, warranty: true } },
++  { name: 'Smart Watches', slug: 'jewelry-watches-smart-watches', parentSlug: 'jewelry-watches-watches', display_order: 1, icon: '⌚️', image_url: 'https://picsum.photos/seed/jewelry-watches-smart-watches/400/400', attributes: { sensor: true, battery_hours: true, warranty: true } },
++
++  // ============ 13) Toys & Games (top-level) ============
++  {
++    name: 'Toys & Games',
++    slug: 'toys',
++    parentSlug: null,
++    display_order: 13,
++    featured: true,
++    trending: true,
++    icon: '🧸',
++    image_url: 'https://picsum.photos/seed/toys/400/400',
++    attributes: { vertical: 'toys' },
++  },
++  { name: 'Action Figures', slug: 'toys-action-figures', parentSlug: 'toys', display_order: 1, icon: '🤖', image_url: 'https://picsum.photos/seed/toys-action-figures/400/400', attributes: { age_group: true, material: true } },
++  { name: 'Soft Toys', slug: 'toys-soft-toys', parentSlug: 'toys', display_order: 2, icon: '🧸', image_url: 'https://picsum.photos/seed/toys-soft-toys/400/400', attributes: { age_group: true, material: true, washable: true } },
++  { name: 'Building Blocks', slug: 'toys-building-blocks', parentSlug: 'toys', display_order: 3, icon: '🧩', image_url: 'https://picsum.photos/seed/toys-building-blocks/400/400', attributes: { age_group: true, piece_count: true } },
++  { name: 'Board Games', slug: 'toys-board-games', parentSlug: 'toys', display_order: 4, icon: '🎲', image_url: 'https://picsum.photos/seed/toys-board-games/400/400', attributes: { players: true, age_group: true } },
++  { name: 'Remote Control Toys', slug: 'toys-remote-control', parentSlug: 'toys', display_order: 5, icon: '🚗', image_url: 'https://picsum.photos/seed/toys-remote-control/400/400', attributes: { age_group: true, battery_type: true } },
+ ];
+ 
+ // TODO: Expand TAXONOMY to at least 150-200 entries as requested.
+diff --git a/backend/db-seeds/seed-staff-users.ts b/backend/db-seeds/seed-staff-users.ts
+new file mode 100644
+index 0000000..a82c45c
+--- /dev/null
++++ b/backend/db-seeds/seed-staff-users.ts
+@@ -0,0 +1,57 @@
++/*
++  Seeds one login for each non-customer role: admin, seller, delivery.
++  These are the accounts used to reach /admin, /seller, /delivery in the
++  merged web-app after logging in on the regular login page.
++
++  Run (from backend/):
++    npx ts-node -r tsconfig-paths/register db-seeds/seed-staff-users.ts
++
++  Requires the same DB_HOST / DB_PORT / DB_USERNAME / DB_PASSWORD / DB_NAME
++  env vars used by the app (backend/.env), and that migrations have already
++  been run (npm run typeorm migration:run) so the "role" column exists.
++*/
++
++import * as bcrypt from 'bcrypt';
++import { AppDataSource } from '../src/typeorm/data-source';
++import { User } from '../src/db/typeorm/entities/User.entity';
++
++type StaffSeed = { name: string; email: string; password: string; role: 'admin' | 'seller' | 'delivery' };
++
++// Change these passwords before using this anywhere but local dev.
++const STAFF_ACCOUNTS: StaffSeed[] = [
++  { name: 'Admin', role: 'admin', email: 'admin@marketplace.test', password: 'Admin@12345' },
++  { name: 'Demo Seller', role: 'seller', email: 'seller@marketplace.test', password: 'Seller@12345' },
++  { name: 'Demo Delivery Partner', role: 'delivery', email: 'delivery@marketplace.test', password: 'Delivery@12345' },
++];
++
++async function main() {
++  await AppDataSource.initialize();
++  const usersRepo = AppDataSource.getRepository(User);
++
++  for (const staff of STAFF_ACCOUNTS) {
++    const existing = await usersRepo.findOne({ where: { email: staff.email } });
++    if (existing) {
++      existing.role = staff.role;
++      await usersRepo.save(existing);
++      console.log(`Updated existing user -> role=${staff.role}: ${staff.email}`);
++      continue;
++    }
++
++    const passwordHash = await bcrypt.hash(staff.password, 10);
++    const user = usersRepo.create({
++      name: staff.name,
++      email: staff.email,
++      passwordHash,
++      role: staff.role,
++    });
++    await usersRepo.save(user);
++    console.log(`Created ${staff.role}: ${staff.email} / ${staff.password}`);
++  }
++
++  await AppDataSource.destroy();
++}
++
++main().catch((err) => {
++  console.error(err);
++  process.exit(1);
++});
+diff --git a/backend/src/auth/auth.controller.ts b/backend/src/auth/auth.controller.ts
+index 4599e81..f4a1709 100644
+--- a/backend/src/auth/auth.controller.ts
++++ b/backend/src/auth/auth.controller.ts
+@@ -1,24 +1,37 @@
+-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
++import { Body, Controller, Get, HttpCode, HttpStatus, Post, Req } from '@nestjs/common';
+ import { AuthService } from './auth.service';
+ import { Public } from './public.decorator';
+ import { SignupDto } from './dto/signup.dto';
+ import { LoginDto } from './dto/login.dto';
+ 
++function requestContext(req: any) {
++  const forwarded = req?.headers?.['x-forwarded-for'];
++  const ipAddress = (typeof forwarded === 'string' ? forwarded.split(',')[0].trim() : null) ?? req?.ip ?? req?.socket?.remoteAddress ?? null;
++  const userAgent = req?.headers?.['user-agent'] ?? null;
++  return { ipAddress, userAgent };
++}
++
+ @Controller('auth')
+ export class AuthController {
+   constructor(private readonly authService: AuthService) {}
+ 
+   @Public()
+   @Post('signup')
+-  signup(@Body() body: SignupDto) {
+-    return this.authService.signup(body);
++  signup(@Body() body: SignupDto, @Req() req: any) {
++    return this.authService.signup(body, requestContext(req));
+   }
+ 
+   @Public()
+   @HttpCode(HttpStatus.OK)
+   @Post('login')
+-  login(@Body() body: LoginDto) {
+-    return this.authService.login(body);
++  login(@Body() body: LoginDto, @Req() req: any) {
++    return this.authService.login(body, requestContext(req));
++  }
++
++  /** Full login/session history for the currently authenticated user. */
++  @Get('sessions')
++  sessions(@Req() req: any) {
++    return this.authService.getLoginHistory(req.user?.userId);
+   }
+ 
+   @Public()
+diff --git a/backend/src/auth/auth.module.ts b/backend/src/auth/auth.module.ts
+index bfc7d0a..71e2585 100644
+--- a/backend/src/auth/auth.module.ts
++++ b/backend/src/auth/auth.module.ts
+@@ -9,9 +9,10 @@ import { APP_GUARD } from '@nestjs/core';
+ import { JwtAuthGuard } from './guards/jwt-auth.guard';
+ import { RolesGuard } from './guards/roles.guard';
+ import { User } from '../db/typeorm/entities/User.entity';
++import { LoginSession } from '../db/typeorm/entities/LoginSession.entity';
+ 
+ @Module({
+-  imports: [ConfigModule, TypeOrmModule.forFeature([User])],
++  imports: [ConfigModule, TypeOrmModule.forFeature([User, LoginSession])],
+   controllers: [AuthController],
+   providers: [
+     AuthService,
+diff --git a/backend/src/auth/auth.service.ts b/backend/src/auth/auth.service.ts
+index cdbf6ed..4005e4d 100644
+--- a/backend/src/auth/auth.service.ts
++++ b/backend/src/auth/auth.service.ts
+@@ -3,15 +3,19 @@ import { InjectRepository } from '@nestjs/typeorm';
+ import { Repository } from 'typeorm';
+ import * as bcrypt from 'bcrypt';
+ import { User } from '../db/typeorm/entities/User.entity';
++import { LoginSession } from '../db/typeorm/entities/LoginSession.entity';
+ import { RedisTokenService } from './services/redis-token.service';
+ import { signAccessToken, verifyAccessToken, JwtPayload } from './token/jwt';
+ import { SignupDto } from './dto/signup.dto';
+ import { LoginDto } from './dto/login.dto';
+ 
++export type LoginContext = { ipAddress?: string | null; userAgent?: string | null };
++
+ @Injectable()
+ export class AuthService {
+   constructor(
+     @InjectRepository(User) private readonly usersRepo: Repository<User>,
++    @InjectRepository(LoginSession) private readonly loginSessionsRepo: Repository<LoginSession>,
+     private readonly redisTokenService: RedisTokenService,
+   ) {}
+ 
+@@ -32,10 +36,10 @@ export class AuthService {
+   }
+ 
+   private toPublicUser(user: User) {
+-    return { id: user.id, name: user.name, email: user.email };
++    return { id: user.id, name: user.name, email: user.email, role: user.role };
+   }
+ 
+-  async signup(dto: SignupDto) {
++  async signup(dto: SignupDto, ctx: LoginContext = {}) {
+     const existing = await this.usersRepo.findOne({ where: { email: dto.email } });
+     if (existing) {
+       throw new ConflictException('An account with this email already exists');
+@@ -43,18 +47,22 @@ export class AuthService {
+ 
+     const passwordHash = await bcrypt.hash(dto.password, 10);
+ 
++    // Self-service signup is always a customer account. Admin/seller/delivery
++    // accounts are provisioned separately (seed script or an existing admin),
++    // never through the public signup form.
+     const user = this.usersRepo.create({
+       name: dto.name,
+       email: dto.email,
+       phone: dto.phone ?? null,
+       passwordHash,
++      role: 'customer',
+     });
+     await this.usersRepo.save(user);
+ 
+-    return this.issueTokens(user);
++    return this.issueTokens(user, ctx);
+   }
+ 
+-  async login(dto: LoginDto) {
++  async login(dto: LoginDto, ctx: LoginContext = {}) {
+     const user = await this.usersRepo.findOne({ where: { email: dto.email } });
+     if (!user) {
+       throw new UnauthorizedException('Invalid email or password');
+@@ -65,11 +73,20 @@ export class AuthService {
+       throw new UnauthorizedException('Invalid email or password');
+     }
+ 
+-    return this.issueTokens(user);
++    return this.issueTokens(user, ctx);
++  }
++
++  /** Full login history for a user, most recent first. */
++  async getLoginHistory(userId: string, limit = 20) {
++    return this.loginSessionsRepo.find({
++      where: { userId },
++      order: { loginAt: 'DESC' },
++      take: limit,
++    });
+   }
+ 
+-  private async issueTokens(user: User) {
+-    const roles: string[] = [];
++  private async issueTokens(user: User, ctx: LoginContext = {}) {
++    const roles: string[] = [user.role];
+     const accessSecret = process.env.JWT_ACCESS_TOKEN_SECRET ?? 'change_me';
+ 
+     const accessToken = this.signAccessToken(user.id, roles, accessSecret);
+@@ -77,6 +94,15 @@ export class AuthService {
+ 
+     await this.redisTokenService.storeRefreshToken(user.id, refreshToken);
+ 
++    // Record this login for the session/history log, without blocking the response.
++    const session = this.loginSessionsRepo.create({
++      userId: user.id,
++      role: user.role,
++      ipAddress: ctx.ipAddress ?? null,
++      userAgent: ctx.userAgent ?? null,
++    });
++    this.loginSessionsRepo.save(session).catch(() => undefined);
++
+     return {
+       accessToken,
+       refreshToken,
+diff --git a/backend/src/db/typeorm/entities/LoginSession.entity.ts b/backend/src/db/typeorm/entities/LoginSession.entity.ts
+new file mode 100644
+index 0000000..054d7d6
+--- /dev/null
++++ b/backend/src/db/typeorm/entities/LoginSession.entity.ts
+@@ -0,0 +1,31 @@
++import { Column, CreateDateColumn, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
++import { User } from './User.entity';
++
++@Entity({ name: 'login_sessions' })
++export class LoginSession {
++  @PrimaryGeneratedColumn('uuid')
++  id!: string;
++
++  @Index()
++  @Column({ name: 'user_id', type: 'uuid' })
++  userId!: string;
++
++  @ManyToOne(() => User, { onDelete: 'CASCADE' })
++  @JoinColumn({ name: 'user_id' })
++  user!: User;
++
++  @Column({ type: 'text' })
++  role!: string;
++
++  @Column({ name: 'ip_address', type: 'text', nullable: true })
++  ipAddress?: string | null;
++
++  @Column({ name: 'user_agent', type: 'text', nullable: true })
++  userAgent?: string | null;
++
++  @CreateDateColumn({ name: 'login_at', type: 'timestamptz' })
++  loginAt!: Date;
++
++  @Column({ name: 'logout_at', type: 'timestamptz', nullable: true })
++  logoutAt?: Date | null;
++}
+diff --git a/backend/src/db/typeorm/entities/User.entity.ts b/backend/src/db/typeorm/entities/User.entity.ts
+index f0d0efe..9c43ec7 100644
+--- a/backend/src/db/typeorm/entities/User.entity.ts
++++ b/backend/src/db/typeorm/entities/User.entity.ts
+@@ -4,6 +4,8 @@ import { v4 as uuidv4 } from 'uuid';
+ import { UserAddress } from './UserAddress.entity';
+ import { Order } from './Order.entity';
+ 
++export type UserRole = 'customer' | 'admin' | 'seller' | 'delivery';
++
+ @Entity({ name: 'users' })
+ export class User {
+   @PrimaryGeneratedColumn('uuid')
+@@ -27,6 +29,11 @@ export class User {
+   passwordHash!: string;
+ 
+ 
++  @Index()
++  @Column({ type: 'text', nullable: false, default: 'customer' })
++  role!: UserRole;
++
++
+   @CreateDateColumn({ name: 'created_at', type: 'timestamptz' })
+   createdAt!: Date;
+ 
+diff --git a/backend/src/migrations/typeorm/1783600000000-UserRolesAndLoginSessions.ts b/backend/src/migrations/typeorm/1783600000000-UserRolesAndLoginSessions.ts
+new file mode 100644
+index 0000000..f5e708f
+--- /dev/null
++++ b/backend/src/migrations/typeorm/1783600000000-UserRolesAndLoginSessions.ts
+@@ -0,0 +1,49 @@
++import { MigrationInterface, QueryRunner } from "typeorm";
++
++export class UserRolesAndLoginSessions1783600000000 implements MigrationInterface {
++    name = 'UserRolesAndLoginSessions1783600000000'
++
++    public async up(queryRunner: QueryRunner): Promise<void> {
++        // Role-based access for the merged customer / admin / seller / delivery app
++        await queryRunner.query(`
++            ALTER TABLE "users"
++            ADD COLUMN "role" text NOT NULL DEFAULT 'customer'
++        `);
++        await queryRunner.query(`
++            ALTER TABLE "users"
++            ADD CONSTRAINT "CHK_users_role" CHECK ("role" IN ('customer', 'admin', 'seller', 'delivery'))
++        `);
++        await queryRunner.query(`
++            CREATE INDEX "IDX_users_role" ON "users" ("role")
++        `);
++
++        // Full login history / session log
++        await queryRunner.query(`
++            CREATE TABLE "login_sessions" (
++                "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
++                "user_id" uuid NOT NULL,
++                "role" text NOT NULL,
++                "ip_address" text,
++                "user_agent" text,
++                "login_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
++                "logout_at" TIMESTAMP WITH TIME ZONE,
++                CONSTRAINT "PK_login_sessions" PRIMARY KEY ("id")
++            )
++        `);
++        await queryRunner.query(`
++            ALTER TABLE "login_sessions"
++            ADD CONSTRAINT "FK_login_sessions_user" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE NO ACTION
++        `);
++        await queryRunner.query(`
++            CREATE INDEX "IDX_login_sessions_user_id" ON "login_sessions" ("user_id")
++        `);
++    }
++
++    public async down(queryRunner: QueryRunner): Promise<void> {
++        await queryRunner.query(`DROP TABLE "login_sessions"`);
++        await queryRunner.query(`DROP INDEX "IDX_users_role"`);
++        await queryRunner.query(`ALTER TABLE "users" DROP CONSTRAINT "CHK_users_role"`);
++        await queryRunner.query(`ALTER TABLE "users" DROP COLUMN "role"`);
++    }
++
++}
+diff --git a/backend/src/orders/orders.controller.ts b/backend/src/orders/orders.controller.ts
+index 4967e6d..cafb4a4 100644
+--- a/backend/src/orders/orders.controller.ts
++++ b/backend/src/orders/orders.controller.ts
+@@ -1,7 +1,9 @@
+-import { Body, Controller, Get, Param, Post, Query, Req } from '@nestjs/common';
++import { Body, Controller, Get, Param, Post, Query, Req, UseGuards } from '@nestjs/common';
+ import { OrdersService } from './orders.service';
+ import { CancelOrderDto } from './dto/cancel-order.dto';
+ import { ReturnOrderDto } from './dto/return-order.dto';
++import { RolesGuard } from '../auth/guards/roles.guard';
++import { Roles } from '../auth/roles.decorator';
+ 
+ @Controller('orders')
+ export class OrdersController {
+@@ -12,6 +14,22 @@ export class OrdersController {
+     return this.ordersService.listOrders(req.user?.userId, Number(page), Number(limit));
+   }
+ 
++  /** Admin: every order across all customers, for the admin dashboard. */
++  @Get('admin/all')
++  @UseGuards(RolesGuard)
++  @Roles('admin')
++  async listAll(@Query('page') page = '1', @Query('limit') limit = '20') {
++    return this.ordersService.listAllOrders(Number(page), Number(limit));
++  }
++
++  /** Delivery: orders currently assigned for delivery/out-for-delivery. */
++  @Get('delivery/assigned')
++  @UseGuards(RolesGuard)
++  @Roles('delivery')
++  async listAssignedForDelivery(@Req() req: any, @Query('page') page = '1', @Query('limit') limit = '20') {
++    return this.ordersService.listOrdersByStatus(['shipped', 'out_for_delivery'], Number(page), Number(limit));
++  }
++
+   @Get(':id')
+   async get(@Req() req: any, @Param('id') id: string) {
+     return this.ordersService.getOrder(req.user?.userId, id);
+diff --git a/backend/src/orders/orders.service.ts b/backend/src/orders/orders.service.ts
+index 22bde65..0a8aa94 100644
+--- a/backend/src/orders/orders.service.ts
++++ b/backend/src/orders/orders.service.ts
+@@ -25,6 +25,32 @@ export class OrdersService {
+     return { data: orders, page, limit, total, hasMore: skip + orders.length < total };
+   }
+ 
++  /** Admin: every order, across all customers. */
++  async listAllOrders(page = 1, limit = 20) {
++    const skip = (page - 1) * limit;
++    const [orders, total] = await this.ordersRepository.findAndCount({
++      order: { createdAt: 'DESC' },
++      skip,
++      take: limit,
++    });
++
++    return { data: orders, page, limit, total, hasMore: skip + orders.length < total };
++  }
++
++  /** Delivery: orders in one of the given statuses (e.g. shipped / out_for_delivery). */
++  async listOrdersByStatus(statuses: string[], page = 1, limit = 20) {
++    const skip = (page - 1) * limit;
++    const [orders, total] = await this.ordersRepository
++      .createQueryBuilder('order')
++      .where('order.status IN (:...statuses)', { statuses })
++      .orderBy('order.createdAt', 'DESC')
++      .skip(skip)
++      .take(limit)
++      .getManyAndCount();
++
++    return { data: orders, page, limit, total, hasMore: skip + orders.length < total };
++  }
++
+   async getOrder(userId: string, orderId: string) {
+     const order = await this.ordersRepository.findOne({ where: { id: orderId, userId } });
+     if (!order) {
+diff --git a/delivery-app/DEPRECATED.md b/delivery-app/DEPRECATED.md
+new file mode 100644
+index 0000000..a134b7e
+--- /dev/null
++++ b/delivery-app/DEPRECATED.md
+@@ -0,0 +1,14 @@
++# Deprecated
++
++This standalone app is no longer used. Admin, seller, and delivery access has
++been merged into `web-app` as role-gated routes reachable from the single
++customer login page:
++
++- Admin dashboard: `web-app/app/admin`
++- Seller dashboard: `web-app/app/seller`
++- Delivery dashboard: `web-app/app/delivery`
++
++There is one login and one port (the web-app). After signing in, a user with
++the `admin`, `seller`, or `delivery` role is redirected automatically to
++their dashboard. This folder can be deleted once you've confirmed nothing
++else references it.
+diff --git a/seller-dashboard/DEPRECATED.md b/seller-dashboard/DEPRECATED.md
+new file mode 100644
+index 0000000..a134b7e
+--- /dev/null
++++ b/seller-dashboard/DEPRECATED.md
+@@ -0,0 +1,14 @@
++# Deprecated
++
++This standalone app is no longer used. Admin, seller, and delivery access has
++been merged into `web-app` as role-gated routes reachable from the single
++customer login page:
++
++- Admin dashboard: `web-app/app/admin`
++- Seller dashboard: `web-app/app/seller`
++- Delivery dashboard: `web-app/app/delivery`
++
++There is one login and one port (the web-app). After signing in, a user with
++the `admin`, `seller`, or `delivery` role is redirected automatically to
++their dashboard. This folder can be deleted once you've confirmed nothing
++else references it.
+diff --git a/web-app/app/account/page.tsx b/web-app/app/account/page.tsx
+new file mode 100644
+index 0000000..a5d5481
+--- /dev/null
++++ b/web-app/app/account/page.tsx
+@@ -0,0 +1,74 @@
++"use client";
++
++import { useEffect, useState } from "react";
++import { RoleGuard } from "../../components/role-guard";
++import { getLoginHistory } from "../../lib/api";
++import { useAuth } from "../../lib/auth-context";
++
++type LoginSession = {
++  id: string;
++  role: string;
++  ipAddress: string | null;
++  userAgent: string | null;
++  loginAt: string;
++};
++
++function AccountPage() {
++  const { user } = useAuth();
++  const [sessions, setSessions] = useState<LoginSession[]>([]);
++  const [loading, setLoading] = useState(true);
++  const [error, setError] = useState("");
++
++  useEffect(() => {
++    getLoginHistory()
++      .then((data) => setSessions(Array.isArray(data) ? data : []))
++      .catch((err) => setError(err.message || "Failed to load login history"))
++      .finally(() => setLoading(false));
++  }, []);
++
++  return (
++    <main style={{ padding: 24 }}>
++      <h1>My Account</h1>
++      <p>
++        {user?.name} — {user?.email}
++      </p>
++
++      <h2 style={{ marginTop: 24 }}>Login history</h2>
++      {loading && <p>Loading…</p>}
++      {error && <p style={{ color: "crimson" }}>{error}</p>}
++      {!loading && !error && sessions.length === 0 && <p>No recorded logins yet.</p>}
++      {sessions.length > 0 && (
++        <table style={{ width: "100%", borderCollapse: "collapse", marginTop: 12 }}>
++          <thead>
++            <tr>
++              <th style={{ textAlign: "left", borderBottom: "1px solid #ddd", padding: 8 }}>When</th>
++              <th style={{ textAlign: "left", borderBottom: "1px solid #ddd", padding: 8 }}>Role</th>
++              <th style={{ textAlign: "left", borderBottom: "1px solid #ddd", padding: 8 }}>IP address</th>
++              <th style={{ textAlign: "left", borderBottom: "1px solid #ddd", padding: 8 }}>Device / browser</th>
++            </tr>
++          </thead>
++          <tbody>
++            {sessions.map((s) => (
++              <tr key={s.id}>
++                <td style={{ padding: 8, borderBottom: "1px solid #f0f0f0" }}>{new Date(s.loginAt).toLocaleString()}</td>
++                <td style={{ padding: 8, borderBottom: "1px solid #f0f0f0" }}>{s.role}</td>
++                <td style={{ padding: 8, borderBottom: "1px solid #f0f0f0" }}>{s.ipAddress ?? "—"}</td>
++                <td style={{ padding: 8, borderBottom: "1px solid #f0f0f0", maxWidth: 320, overflow: "hidden", textOverflow: "ellipsis" }}>
++                  {s.userAgent ?? "—"}
++                </td>
++              </tr>
++            ))}
++          </tbody>
++        </table>
++      )}
++    </main>
++  );
++}
++
++export default function Account() {
++  return (
++    <RoleGuard allow={["customer", "admin", "seller", "delivery"]}>
++      <AccountPage />
++    </RoleGuard>
++  );
++}
+diff --git a/web-app/app/admin/page.tsx b/web-app/app/admin/page.tsx
+new file mode 100644
+index 0000000..1dd87d6
+--- /dev/null
++++ b/web-app/app/admin/page.tsx
+@@ -0,0 +1,82 @@
++"use client";
++
++import { useEffect, useState } from "react";
++import { RoleGuard } from "../../components/role-guard";
++import { getAllOrdersAdmin } from "../../lib/api";
++import { useAuth } from "../../lib/auth-context";
++
++type Order = {
++  id: string;
++  status: string;
++  totalAmount?: number;
++  createdAt: string;
++};
++
++function AdminDashboard() {
++  const { user, logout } = useAuth();
++  const [orders, setOrders] = useState<Order[]>([]);
++  const [total, setTotal] = useState(0);
++  const [loading, setLoading] = useState(true);
++  const [error, setError] = useState("");
++
++  useEffect(() => {
++    getAllOrdersAdmin(1, 20)
++      .then((res) => {
++        setOrders(res.data ?? []);
++        setTotal(res.total ?? 0);
++      })
++      .catch((err) => setError(err.message || "Failed to load orders"))
++      .finally(() => setLoading(false));
++  }, []);
++
++  return (
++    <main style={{ padding: 24, fontFamily: "system-ui" }}>
++      <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
++        <div>
++          <h1>Admin Dashboard</h1>
++          <p>Signed in as {user?.name} ({user?.email})</p>
++        </div>
++        <button onClick={logout}>Sign out</button>
++      </header>
++
++      <section style={{ marginTop: 24 }}>
++        <h2>All Orders ({total})</h2>
++        {loading && <p>Loading orders…</p>}
++        {error && <p style={{ color: "crimson" }}>{error}</p>}
++        {!loading && !error && orders.length === 0 && <p>No orders yet.</p>}
++        {orders.length > 0 && (
++          <table style={{ width: "100%", borderCollapse: "collapse", marginTop: 12 }}>
++            <thead>
++              <tr>
++                <th style={{ textAlign: "left", borderBottom: "1px solid #ddd", padding: 8 }}>Order ID</th>
++                <th style={{ textAlign: "left", borderBottom: "1px solid #ddd", padding: 8 }}>Status</th>
++                <th style={{ textAlign: "left", borderBottom: "1px solid #ddd", padding: 8 }}>Total</th>
++                <th style={{ textAlign: "left", borderBottom: "1px solid #ddd", padding: 8 }}>Placed</th>
++              </tr>
++            </thead>
++            <tbody>
++              {orders.map((order) => (
++                <tr key={order.id}>
++                  <td style={{ padding: 8, borderBottom: "1px solid #f0f0f0" }}>{order.id}</td>
++                  <td style={{ padding: 8, borderBottom: "1px solid #f0f0f0" }}>{order.status}</td>
++                  <td style={{ padding: 8, borderBottom: "1px solid #f0f0f0" }}>{order.totalAmount ?? "—"}</td>
++                  <td style={{ padding: 8, borderBottom: "1px solid #f0f0f0" }}>
++                    {new Date(order.createdAt).toLocaleString()}
++                  </td>
++                </tr>
++              ))}
++            </tbody>
++          </table>
++        )}
++      </section>
++    </main>
++  );
++}
++
++export default function AdminPage() {
++  return (
++    <RoleGuard allow={["admin"]}>
++      <AdminDashboard />
++    </RoleGuard>
++  );
++}
+diff --git a/web-app/app/delivery/page.tsx b/web-app/app/delivery/page.tsx
+new file mode 100644
+index 0000000..9fdc980
+--- /dev/null
++++ b/web-app/app/delivery/page.tsx
+@@ -0,0 +1,62 @@
++"use client";
++
++import { useEffect, useState } from "react";
++import { RoleGuard } from "../../components/role-guard";
++import { getAssignedDeliveries } from "../../lib/api";
++import { useAuth } from "../../lib/auth-context";
++
++type Order = {
++  id: string;
++  status: string;
++  createdAt: string;
++};
++
++function DeliveryDashboard() {
++  const { user, logout } = useAuth();
++  const [orders, setOrders] = useState<Order[]>([]);
++  const [loading, setLoading] = useState(true);
++  const [error, setError] = useState("");
++
++  useEffect(() => {
++    getAssignedDeliveries(1, 20)
++      .then((res) => setOrders(res.data ?? []))
++      .catch((err) => setError(err.message || "Failed to load deliveries"))
++      .finally(() => setLoading(false));
++  }, []);
++
++  return (
++    <main style={{ padding: 24, fontFamily: "system-ui" }}>
++      <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
++        <div>
++          <h1>Delivery Dashboard</h1>
++          <p>Signed in as {user?.name} ({user?.email})</p>
++        </div>
++        <button onClick={logout}>Sign out</button>
++      </header>
++
++      <section style={{ marginTop: 24 }}>
++        <h2>Orders to deliver</h2>
++        {loading && <p>Loading…</p>}
++        {error && <p style={{ color: "crimson" }}>{error}</p>}
++        {!loading && !error && orders.length === 0 && <p>Nothing shipped or out for delivery right now.</p>}
++        <ul style={{ listStyle: "none", padding: 0, display: "grid", gap: 8 }}>
++          {orders.map((order) => (
++            <li key={order.id} style={{ border: "1px solid #eee", borderRadius: 8, padding: 12 }}>
++              <strong>{order.id}</strong> — {order.status.replace(/_/g, " ")}
++              <br />
++              <span style={{ color: "#666", fontSize: 13 }}>{new Date(order.createdAt).toLocaleString()}</span>
++            </li>
++          ))}
++        </ul>
++      </section>
++    </main>
++  );
++}
++
++export default function DeliveryPage() {
++  return (
++    <RoleGuard allow={["delivery"]}>
++      <DeliveryDashboard />
++    </RoleGuard>
++  );
++}
+diff --git a/web-app/app/login/page.tsx b/web-app/app/login/page.tsx
+index a3b7781..02e703a 100644
+--- a/web-app/app/login/page.tsx
++++ b/web-app/app/login/page.tsx
+@@ -19,7 +19,14 @@ export default function LoginPage() {
+     try {
+       const data = await login(email, password);
+       setSession(data.user, data.accessToken);
+-      router.push("/");
++
++      const destinationByRole: Record<string, string> = {
++        admin: "/admin",
++        seller: "/seller",
++        delivery: "/delivery",
++        customer: "/",
++      };
++      router.push(destinationByRole[data.user.role] ?? "/");
+     } catch (err: any) {
+       setError(err.message || "Something went wrong");
+     } finally {
+@@ -32,6 +39,10 @@ export default function LoginPage() {
+       <form className="auth-form" onSubmit={handleSubmit}>
+         <h1>Sign in</h1>
+         <p className="auth-subtitle">Welcome back to the marketplace.</p>
++        <p className="auth-subtitle auth-subtitle--muted">
++          One login for everyone — customers, admin, sellers, and delivery partners are all routed
++          to the right dashboard automatically after signing in.
++        </p>
+         {error && <p className="auth-error">{error}</p>}
+         <label>
+           Email
+diff --git a/web-app/app/seller/page.tsx b/web-app/app/seller/page.tsx
+new file mode 100644
+index 0000000..22ae41b
+--- /dev/null
++++ b/web-app/app/seller/page.tsx
+@@ -0,0 +1,43 @@
++"use client";
++
++import { RoleGuard } from "../../components/role-guard";
++import { useAuth } from "../../lib/auth-context";
++
++function SellerDashboard() {
++  const { user, logout } = useAuth();
++
++  return (
++    <main style={{ padding: 24, fontFamily: "system-ui" }}>
++      <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
++        <div>
++          <h1>Seller Dashboard</h1>
++          <p>Signed in as {user?.name} ({user?.email})</p>
++        </div>
++        <button onClick={logout}>Sign out</button>
++      </header>
++
++      <section style={{ marginTop: 24, display: "grid", gap: 16, gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
++        <div style={{ border: "1px solid #eee", borderRadius: 8, padding: 16 }}>
++          <h3>My Listings</h3>
++          <p>Product catalog management connects to the same /catalog endpoints as the storefront.</p>
++        </div>
++        <div style={{ border: "1px solid #eee", borderRadius: 8, padding: 16 }}>
++          <h3>Orders for my products</h3>
++          <p>Wire this to a seller-scoped orders endpoint once seller-product ownership is modeled in the backend.</p>
++        </div>
++        <div style={{ border: "1px solid #eee", borderRadius: 8, padding: 16 }}>
++          <h3>Payouts</h3>
++          <p>The `sellers` table already tracks commission_rate and bank details for this.</p>
++        </div>
++      </section>
++    </main>
++  );
++}
++
++export default function SellerPage() {
++  return (
++    <RoleGuard allow={["seller"]}>
++      <SellerDashboard />
++    </RoleGuard>
++  );
++}
+diff --git a/web-app/components/role-guard.tsx b/web-app/components/role-guard.tsx
+new file mode 100644
+index 0000000..a0c8c5b
+--- /dev/null
++++ b/web-app/components/role-guard.tsx
+@@ -0,0 +1,31 @@
++"use client";
++
++import { useEffect } from "react";
++import { useRouter } from "next/navigation";
++import { useAuth, UserRole } from "../lib/auth-context";
++
++/**
++ * Gates a route to one or more roles. Used by /admin, /seller, /delivery
++ * so the merged web-app can serve all four roles from a single login
++ * instead of separate admin/seller/delivery apps on separate ports.
++ */
++export function RoleGuard({ allow, children }: { allow: UserRole[]; children: React.ReactNode }) {
++  const { user } = useAuth();
++  const router = useRouter();
++
++  useEffect(() => {
++    if (user === null) {
++      router.replace("/login");
++      return;
++    }
++    if (!allow.includes(user.role)) {
++      router.replace("/");
++    }
++  }, [user, allow, router]);
++
++  if (!user || !allow.includes(user.role)) {
++    return null;
++  }
++
++  return <>{children}</>;
++}
+diff --git a/web-app/components/site-shell.tsx b/web-app/components/site-shell.tsx
+index a7c8dae..c51e2e3 100644
+--- a/web-app/components/site-shell.tsx
++++ b/web-app/components/site-shell.tsx
+@@ -50,6 +50,12 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
+           <Link href="/wishlist">Wishlist</Link>
+           {user ? (
+             <>
++              {user.role !== "customer" && (
++                <Link href={`/${user.role}`} className="text-button">
++                  {user.role === "admin" ? "Admin" : user.role === "seller" ? "Seller" : "Delivery"} dashboard
++                </Link>
++              )}
++              <Link href="/account" className="text-button">My Account</Link>
+               <span className="greeting">Hi, {user.name}</span>
+               <button className="text-button" onClick={logout} type="button">Sign out</button>
+             </>
+diff --git a/web-app/lib/api.ts b/web-app/lib/api.ts
+index 69f000d..dd87169 100644
+--- a/web-app/lib/api.ts
++++ b/web-app/lib/api.ts
+@@ -47,3 +47,18 @@ export async function signup(name: string, email: string, password: string) {
+   if (!res.ok) throw new Error(data.message || "Signup failed");
+   return data;
+ }
++
++/** Full login/session history for the current user. */
++export async function getLoginHistory() {
++  return fetchJson("/auth/sessions");
++}
++
++/** Admin: every order across all customers. */
++export async function getAllOrdersAdmin(page = 1, limit = 20) {
++  return fetchJson(`/orders/admin/all?page=${page}&limit=${limit}`);
++}
++
++/** Delivery: orders currently shipped / out for delivery. */
++export async function getAssignedDeliveries(page = 1, limit = 20) {
++  return fetchJson(`/orders/delivery/assigned?page=${page}&limit=${limit}`);
++}
+diff --git a/web-app/lib/auth-context.tsx b/web-app/lib/auth-context.tsx
+index 1679158..188ad9c 100644
+--- a/web-app/lib/auth-context.tsx
++++ b/web-app/lib/auth-context.tsx
+@@ -2,10 +2,13 @@
+ 
+ import React, { createContext, useContext, useEffect, useMemo, useState, ReactNode } from "react";
+ 
++export type UserRole = "customer" | "admin" | "seller" | "delivery";
++
+ type SessionUser = {
+   id: string;
+   name: string;
+   email: string;
++  role: UserRole;
+ };
+ 
+ type AuthContextType = {

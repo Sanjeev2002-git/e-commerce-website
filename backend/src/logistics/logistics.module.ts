@@ -11,3 +11,4 @@ import { Order } from '../db/typeorm/entities/Order.entity';
 })
 export class LogisticsModule {}
 
+

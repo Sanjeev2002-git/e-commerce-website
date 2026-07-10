@@ -3,14 +3,15 @@
   "private": true,
   "version": "0.1.0",
   "workspaces": [
-    "backend/*",
-    "web-app/*",
-    "mobile-app/*",
-    "admin-dashboard/*",
-    "seller-dashboard/*",
-    "delivery-app/*"
+    "backend",
+    "web-app",
+    "mobile-app",
+    "admin-dashboard",
+    "seller-dashboard",
+    "delivery-app"
   ],
   "scripts": {
+    "dev": "npm run dev --prefix web-app",
     "lint": "echo \"Run lint per package\"",
     "test": "echo \"Run tests per package\""
   },
