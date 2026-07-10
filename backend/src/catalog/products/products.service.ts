@@ -20,9 +20,76 @@ export type CatalogProduct = {
   os?: string;
 };
 
+const CATEGORY_CONFIG: Record<string, { brands: string[]; nouns: string[]; priceRange: [number, number] }> = {
+  fashion: {
+    brands: ['UrbanTrail', 'Wrogn', 'Roadster', 'HRX', 'Levis', 'Aurelia', 'Denizen'],
+    nouns: ['Backpack', 'Sneakers', 'Jacket', 'T-Shirt', 'Jeans', 'Sandals', 'Watch', 'Sunglasses'],
+    priceRange: [399, 4999],
+  },
+  electronics: {
+    brands: ['Nova', 'Breeze', 'Zeta', 'Pulse', 'Orbit', 'Vortex', 'Quantum'],
+    nouns: ['Smartwatch', 'LED TV', 'Bluetooth Speaker', 'Wireless Earbuds', 'Power Bank', 'Smartphone', 'Laptop', 'Router'],
+    priceRange: [999, 89999],
+  },
+  home: {
+    brands: ['Luna', 'Nestwell', 'Casa', 'Havenly', 'Urban Ladder', 'Woodsmith'],
+    nouns: ['Dining Table', 'Sofa Set', 'Bookshelf', 'Bed Frame', 'Wardrobe', 'Curtains', 'Table Lamp', 'Rug'],
+    priceRange: [799, 45999],
+  },
+  kitchen: {
+    brands: ['Glow', 'Prestige', 'Borosil', 'Milton', 'Wonderchef', 'Cello'],
+    nouns: ['Blender', 'Induction Cooktop', 'Non-Stick Pan', 'Air Fryer', 'Water Bottle', 'Mixer Grinder', 'Cookware Set'],
+    priceRange: [249, 12999],
+  },
+};
+
+function mulberry32(seed: number) {
+  return function () {
+    seed |= 0;
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function generateCatalog(count: number): CatalogProduct[] {
+  const rand = mulberry32(42);
+  const categories = Object.keys(CATEGORY_CONFIG);
+  const products: CatalogProduct[] = [];
+
+  for (let i = 0; i < count; i++) {
+    const category = categories[Math.floor(rand() * categories.length)];
+    const config = CATEGORY_CONFIG[category];
+    const brand = config.brands[Math.floor(rand() * config.brands.length)];
+    const noun = config.nouns[Math.floor(rand() * config.nouns.length)];
+    const [minPrice, maxPrice] = config.priceRange;
+    const price = Math.round(minPrice + rand() * (maxPrice - minPrice));
+    const discount = Math.floor(rand() * 40);
+    const ratings = Math.round((3 + rand() * 2) * 10) / 10;
+    const variant = ['Pro', 'Max', 'Lite', 'Plus', 'Edge', 'Classic', ''][Math.floor(rand() * 7)];
+
+    products.push({
+      id: `prod-${i + 6}`,
+      title: `${brand} ${noun}${variant ? ' ' + variant : ''}`,
+      price,
+      images: [],
+      category,
+      stock: Math.floor(rand() * 200),
+      specs: {},
+      brand,
+      ratings,
+      description: `${noun} from ${brand}, built for everyday reliability.`,
+      discount,
+    });
+  }
+
+  return products;
+}
+
 @Injectable()
 export class ProductsService {
-  private readonly products: CatalogProduct[] = [
+  private readonly featured: CatalogProduct[] = [
     {
       id: 'prod-1',
       title: 'AeroLite Backpack',
@@ -97,6 +164,8 @@ export class ProductsService {
     },
   ];
 
+  private readonly products: CatalogProduct[] = [...this.featured, ...generateCatalog(10000)];
+
   async listProducts(query: Record<string, string> = {}) {
     const filtered = this.products.filter((product) => {
       if (query.category && product.category !== query.category) return false;
@@ -109,7 +178,12 @@ export class ProductsService {
       return true;
     });
 
-    return { data: filtered, total: filtered.length };
+    const page = Math.max(1, parseInt(query.page as string, 10) || 1);
+    const limit = Math.min(100, Math.max(1, parseInt(query.limit as string, 10) || 24));
+    const start = (page - 1) * limit;
+    const paged = filtered.slice(start, start + limit);
+
+    return { data: paged, total: filtered.length, page, limit };
   }
 
   async getProduct(productId: string) {
@@ -138,4 +212,3 @@ export class ProductsService {
     ];
   }
 }
-
