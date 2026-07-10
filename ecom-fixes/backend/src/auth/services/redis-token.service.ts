@@ -1,11 +1,18 @@
 import { Injectable, Logger } from '@nestjs/common';
 
+/**
+ * In-memory refresh token store (no Redis required).
+ * Stores one refresh token per user. On server restart tokens are cleared
+ * and users will need to log in again — acceptable for dev/portfolio use.
+ */
 @Injectable()
 export class RedisTokenService {
   private readonly logger = new Logger(RedisTokenService.name);
   private readonly store = new Map<string, { token: string; expiresAt: number }>();
 
-  private key(userId: string) { return `auth:refresh:${userId}`; }
+  private key(userId: string) {
+    return `auth:refresh:${userId}`;
+  }
 
   private refreshExpiryMs(): number {
     const raw = process.env.JWT_REFRESH_TOKEN_EXPIRY ?? '7d';

@@ -28,3 +28,4 @@ export class CategoriesController {
     return { id, updated: body };
   }
 }
+

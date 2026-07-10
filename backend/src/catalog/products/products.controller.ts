@@ -29,3 +29,4 @@ export class ProductsController {
     return this.productsService.updateProduct(id, body);
   }
 }
+

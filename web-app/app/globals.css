@@ -1,10 +1,17 @@
 :root {
-  --paper: #FAF8F3;
-  --ink: #21262B;
-  --marigold: #E8A33D;
-  --teal: #2F6F65;
-  --rule: #D8D3C7;
+  --bg: #F1F3F6;
+  --ink: #212121;
+  --muted: #878787;
+  --brand: #2874F0;
+  --brand-dark: #1659c9;
+  --accent: #FFE500;
+  --success: #388E3C;
+  --danger: #FF6161;
+  --rule: #E0E0E0;
   --card: #FFFFFF;
+  --paper: #F1F3F6;
+  --marigold: #FFE500;
+  --teal: #2874F0;
 }
 
 * { box-sizing: border-box; }
@@ -19,35 +26,41 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 32px;
-  border-bottom: 1px solid var(--rule);
-  gap: 16px;
+  padding: 12px 32px;
+  gap: 24px;
+  background: var(--brand);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
 }
 .site-branding {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0;
+  flex-shrink: 0;
 }
 .site-branding .wordmark {
-  font-family: 'Fraunces', serif;
-  font-weight: 600;
-  font-size: 1.5rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 1.4rem;
   letter-spacing: -0.01em;
-  color: var(--ink);
+  color: #ffffff;
   text-decoration: none;
 }
 .site-tag {
-  font-size: 0.8rem;
-  color: var(--teal);
+  font-size: 0.7rem;
+  font-style: italic;
+  color: var(--accent);
 }
 .site-search {
   flex: 1;
   display: flex;
-  border: 1px solid var(--rule);
   background: var(--card);
-  border-radius: 999px;
+  border-radius: 2px;
   overflow: hidden;
-  max-width: 560px;
+  max-width: 640px;
 }
 .site-search input {
   flex: 1;
@@ -55,83 +68,99 @@ body {
   padding: 10px 14px;
   outline: none;
   font: inherit;
+  font-size: 0.9rem;
 }
 .site-search button {
   border: none;
-  background: var(--teal);
-  color: white;
+  background: var(--card);
+  color: var(--brand);
   padding: 0 16px;
   cursor: pointer;
+  font-weight: 600;
 }
 .site-header nav a, .text-button {
   margin-left: 24px;
-  color: var(--ink);
+  color: #ffffff;
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  font-weight: 500;
   background: none;
   border: none;
   cursor: pointer;
 }
 .sub-nav {
   display: flex;
-  gap: 12px;
+  gap: 8px;
   flex-wrap: wrap;
-  padding: 12px 32px 0;
+  padding: 10px 32px;
+  background: var(--card);
+  border-bottom: 1px solid var(--rule);
 }
 .sub-nav a {
   text-decoration: none;
   color: var(--ink);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background 0.15s ease;
 }
+.sub-nav a:hover { background: var(--bg); }
 .site-footer {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
-  padding: 32px;
+  padding: 40px 32px;
   margin-top: 32px;
-  border-top: 1px solid var(--rule);
-  background: #f7f2e8;
+  background: #172337;
+  color: #cfd6e0;
 }
 .site-footer h3, .site-footer h4 {
-  margin: 0 0 8px;
+  margin: 0 0 12px;
+  color: #ffffff;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 .site-footer a {
   display: block;
-  color: var(--ink);
+  color: #cfd6e0;
   text-decoration: none;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
 }
+.site-footer a:hover { color: #ffffff; }
 .cart-badge {
-  background: var(--marigold);
-  color: var(--ink);
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.75rem;
-  padding: 2px 8px;
+  background: var(--danger);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.7rem;
+  padding: 1px 6px;
   border-radius: 999px;
-  margin-left: 6px;
+  margin-left: 4px;
+  vertical-align: top;
 }
 
 .market-hero { padding: 48px 32px 24px; }
 .eyebrow {
-  font-family: 'IBM Plex Mono', monospace;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   font-size: 0.75rem;
-  color: var(--teal);
+  font-weight: 600;
+  color: var(--brand);
 }
 .market-hero h1 {
-  font-family: 'Fraunces', serif;
-  font-weight: 600;
-  font-size: 2.5rem;
+  font-weight: 700;
+  font-size: 2.2rem;
   margin: 8px 0 4px;
   max-width: 600px;
 }
-.market-hero p { color: #555; max-width: 520px; }
+.market-hero p { color: var(--muted); max-width: 520px; }
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
   padding: 8px 32px 64px;
 }
 
@@ -139,60 +168,95 @@ body {
   position: relative;
   background: var(--card);
   border: 1px solid var(--rule);
-  border-radius: 4px;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
 }
 .product-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(33, 38, 43, 0.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
 }
 .product-image {
   aspect-ratio: 1 / 1;
-  border-radius: 4px 4px 0 0;
+  background: #f9f9f9;
+  border-radius: 6px 6px 0 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
-.product-body { padding: 14px 14px 18px; }
+.product-body { padding: 12px 14px 14px; }
 .product-seller {
-  font-family: 'IBM Plex Mono', monospace;
   font-size: 0.7rem;
-  color: var(--teal);
+  color: var(--muted);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
+  margin: 0;
 }
 .product-name {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin: 4px 0 6px;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.rating-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: var(--success);
+  color: #ffffff;
+  font-size: 0.72rem;
   font-weight: 600;
-  font-size: 0.98rem;
-  margin: 4px 0 0;
+  padding: 1px 6px;
+  border-radius: 3px;
+  margin-bottom: 6px;
 }
 
 .price-tag {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  background: var(--marigold);
+  font-weight: 700;
+  font-size: 1rem;
   color: var(--ink);
-  font-family: 'IBM Plex Mono', monospace;
-  font-weight: 500;
-  font-size: 0.85rem;
-  padding: 6px 10px 6px 14px;
-  transform: rotate(-6deg);
-  clip-path: polygon(14px 0, 100% 0, 100% 100%, 14px 100%, 0 50%);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
-.price-tag::before {
-  content: '';
+.price-mrp {
+  text-decoration: line-through;
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin-left: 6px;
+  font-weight: 400;
+}
+.price-discount {
+  color: var(--success);
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-left: 6px;
+}
+.price-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+.wishlist-btn {
   position: absolute;
-  left: 6px;
-  top: 50%;
-  width: 4px;
-  height: 4px;
-  background: var(--paper);
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.95rem;
+  z-index: 2;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
 }
 
 a:focus-visible, button:focus-visible {
@@ -261,7 +325,7 @@ a:focus-visible, button:focus-visible {
   margin-left: 24px;
   font-size: 0.9rem;
   color: var(--teal);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: 'Roboto', sans-serif; font-weight: 600;
 }
 
 .auth-page {
@@ -280,7 +344,7 @@ a:focus-visible, button:focus-visible {
   max-width: 380px;
 }
 .auth-form h1 {
-  font-family: "Fraunces", serif;
+  font-family: 'Roboto', sans-serif; font-weight: 700;
   font-size: 1.8rem;
   margin: 0 0 4px;
 }
@@ -312,8 +376,8 @@ a:focus-visible, button:focus-visible {
 .auth-form button {
   width: 100%;
   padding: 12px 0;
-  background: var(--marigold);
-  color: var(--ink);
+  background: var(--brand);
+  color: #ffffff;
   border: none;
   border-radius: 4px;
   font-weight: 600;
@@ -321,12 +385,13 @@ a:focus-visible, button:focus-visible {
   cursor: pointer;
   margin-top: 8px;
 }
+.auth-form button:hover { background: var(--brand-dark); }
 .auth-form button:disabled { opacity: 0.6; cursor: default; }
 .auth-footer { text-align: center; font-size: 0.85rem; margin-top: 18px; color: #666; }
 .auth-footer a { color: var(--teal); }
 
 .cart-page { padding: 40px 32px; max-width: 720px; margin: 0 auto; }
-.cart-page h1 { font-family: "Fraunces", serif; }
+.cart-page h1 { font-family: 'Roboto', sans-serif; font-weight: 700; }
 .cart-list { list-style: none; padding: 0; margin: 24px 0; }
 .cart-item {
   display: flex;
@@ -348,7 +413,7 @@ a:focus-visible, button:focus-visible {
 .cart-item-info { flex: 1; }
 .cart-item-info h3 { margin: 2px 0; font-size: 1rem; }
 .cart-item-price {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: 'Roboto', sans-serif; font-weight: 600;
   font-weight: 600;
 }
 .remove-btn {
@@ -362,7 +427,7 @@ a:focus-visible, button:focus-visible {
 .remove-btn:hover { border-color: var(--teal); color: var(--teal); }
 .cart-total {
   text-align: right;
-  font-family: "IBM Plex Mono", monospace;
+  font-family: 'Roboto', sans-serif; font-weight: 600;
   font-size: 1.2rem;
   font-weight: 600;
   padding-top: 16px;
@@ -409,7 +474,7 @@ a:focus-visible, button:focus-visible {
 }
 
 .hero-copy h1 {
-  font-family: "Fraunces", serif;
+  font-family: 'Roboto', sans-serif; font-weight: 700;
   font-size: 2.2rem;
   margin: 8px 0 12px;
 }
@@ -501,7 +566,7 @@ a:focus-visible, button:focus-visible {
 .secondary-btn { background: var(--marigold); border: none; }
 
 .detail-price {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: 'Roboto', sans-serif; font-weight: 600;
   font-size: 1.4rem;
   margin-top: 12px;
 }
