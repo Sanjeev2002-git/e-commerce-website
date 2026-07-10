@@ -2,10 +2,13 @@
 
 import React, { createContext, useContext, useEffect, useMemo, useState, ReactNode } from "react";
 
+export type UserRole = "customer" | "admin" | "seller" | "delivery";
+
 type SessionUser = {
   id: string;
   name: string;
   email: string;
+  role: UserRole;
 };
 
 type AuthContextType = {

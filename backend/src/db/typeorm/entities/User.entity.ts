@@ -4,6 +4,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { UserAddress } from './UserAddress.entity';
 import { Order } from './Order.entity';
 
+export type UserRole = 'customer' | 'admin' | 'seller' | 'delivery';
+
 @Entity({ name: 'users' })
 export class User {
   @PrimaryGeneratedColumn('uuid')
@@ -25,6 +27,11 @@ export class User {
 
   @Column({ name: 'password_hash', type: 'text', nullable: false })
   passwordHash!: string;
+
+
+  @Index()
+  @Column({ type: 'text', nullable: false, default: 'customer' })
+  role!: UserRole;
 
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamptz' })

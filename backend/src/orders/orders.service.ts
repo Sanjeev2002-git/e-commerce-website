@@ -25,6 +25,32 @@ export class OrdersService {
     return { data: orders, page, limit, total, hasMore: skip + orders.length < total };
   }
 
+  /** Admin: every order, across all customers. */
+  async listAllOrders(page = 1, limit = 20) {
+    const skip = (page - 1) * limit;
+    const [orders, total] = await this.ordersRepository.findAndCount({
+      order: { createdAt: 'DESC' },
+      skip,
+      take: limit,
+    });
+
+    return { data: orders, page, limit, total, hasMore: skip + orders.length < total };
+  }
+
+  /** Delivery: orders in one of the given statuses (e.g. shipped / out_for_delivery). */
+  async listOrdersByStatus(statuses: string[], page = 1, limit = 20) {
+    const skip = (page - 1) * limit;
+    const [orders, total] = await this.ordersRepository
+      .createQueryBuilder('order')
+      .where('order.status IN (:...statuses)', { statuses })
+      .orderBy('order.createdAt', 'DESC')
+      .skip(skip)
+      .take(limit)
+      .getManyAndCount();
+
+    return { data: orders, page, limit, total, hasMore: skip + orders.length < total };
+  }
+
   async getOrder(userId: string, orderId: string) {
     const order = await this.ordersRepository.findOne({ where: { id: orderId, userId } });
     if (!order) {

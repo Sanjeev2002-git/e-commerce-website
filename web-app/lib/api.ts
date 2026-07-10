@@ -47,3 +47,18 @@ export async function signup(name: string, email: string, password: string) {
   if (!res.ok) throw new Error(data.message || "Signup failed");
   return data;
 }
+
+/** Full login/session history for the current user. */
+export async function getLoginHistory() {
+  return fetchJson("/auth/sessions");
+}
+
+/** Admin: every order across all customers. */
+export async function getAllOrdersAdmin(page = 1, limit = 20) {
+  return fetchJson(`/orders/admin/all?page=${page}&limit=${limit}`);
+}
+
+/** Delivery: orders currently shipped / out for delivery. */
+export async function getAssignedDeliveries(page = 1, limit = 20) {
+  return fetchJson(`/orders/delivery/assigned?page=${page}&limit=${limit}`);
+}

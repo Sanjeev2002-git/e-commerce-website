@@ -9,9 +9,10 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { RolesGuard } from './guards/roles.guard';
 import { User } from '../db/typeorm/entities/User.entity';
+import { LoginSession } from '../db/typeorm/entities/LoginSession.entity';
 
 @Module({
-  imports: [ConfigModule, TypeOrmModule.forFeature([User])],
+  imports: [ConfigModule, TypeOrmModule.forFeature([User, LoginSession])],
   controllers: [AuthController],
   providers: [
     AuthService,

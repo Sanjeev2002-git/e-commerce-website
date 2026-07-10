@@ -50,6 +50,12 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           <Link href="/wishlist">Wishlist</Link>
           {user ? (
             <>
+              {user.role !== "customer" && (
+                <Link href={`/${user.role}`} className="text-button">
+                  {user.role === "admin" ? "Admin" : user.role === "seller" ? "Seller" : "Delivery"} dashboard
+                </Link>
+              )}
+              <Link href="/account" className="text-button">My Account</Link>
               <span className="greeting">Hi, {user.name}</span>
               <button className="text-button" onClick={logout} type="button">Sign out</button>
             </>
