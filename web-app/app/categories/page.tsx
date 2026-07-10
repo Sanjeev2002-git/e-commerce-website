@@ -19,6 +19,10 @@ export default function CategoriesPage() {
     <main className="page-shell">
       <h1>Shop by category</h1>
       <div className="product-grid">
+        <Link href="/products" className="category-card">
+          <h3>All Items</h3>
+          <p>Browse the entire catalog</p>
+        </Link>
         {categories.map((category) => (
           <Link key={category.slug} href={`/products?category=${category.slug}`} className="category-card">
             <h3>{category.name}</h3>

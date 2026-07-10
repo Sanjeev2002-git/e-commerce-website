@@ -1,15 +1,18 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
+import { Public } from '../../auth/public.decorator';
 
 @Controller('categories')
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
+  @Public()
   @Get()
   list() {
     return { data: this.categoriesService.listCategories() };
   }
 
+  @Public()
   @Get(':slug')
   getBySlug(@Param('slug') slug: string) {
     return { data: this.categoriesService.getCategory(slug), slug };
@@ -25,4 +28,3 @@ export class CategoriesController {
     return { id, updated: body };
   }
 }
-

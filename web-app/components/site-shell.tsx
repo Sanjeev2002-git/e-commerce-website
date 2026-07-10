@@ -48,7 +48,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           <Link href="/products">Products</Link>
           <Link href="/orders">Orders</Link>
           <Link href="/wishlist">Wishlist</Link>
-          <Link href="/addresses">Addresses</Link>
           {user ? (
             <>
               <span className="greeting">Hi, {user.name}</span>
@@ -62,6 +61,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       </header>
 
       <nav className="sub-nav" aria-label="Category shortcuts">
+        <Link href="/products">All</Link>
         <Link href="/products?category=fashion">Fashion</Link>
         <Link href="/products?category=electronics">Electronics</Link>
         <Link href="/products?category=home">Home</Link>

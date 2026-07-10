@@ -1,15 +1,18 @@
 import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { ProductsService } from './products.service';
+import { Public } from '../../auth/public.decorator';
 
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
+  @Public()
   @Get()
   async list(@Query() query: any) {
     return this.productsService.listProducts(query);
   }
 
+  @Public()
   @Get(':id')
   async get(@Param('id') id: string) {
     const product = await this.productsService.getProduct(id);
@@ -26,4 +29,3 @@ export class ProductsController {
     return this.productsService.updateProduct(id, body);
   }
 }
-
