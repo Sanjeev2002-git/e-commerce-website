@@ -1,0 +1,21 @@
+{
+  "name": "ecommerce-multi-vendor-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "backend/*",
+    "web-app/*",
+    "mobile-app/*",
+    "admin-dashboard/*",
+    "seller-dashboard/*",
+    "delivery-app/*"
+  ],
+  "scripts": {
+    "lint": "echo \"Run lint per package\"",
+    "test": "echo \"Run tests per package\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0",
+    "dotenv": "^16.4.5"
+  }
+}

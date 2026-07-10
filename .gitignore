@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build outputs
+.next/
+**/.next/
+out/
+**/out/
+dist/
+**/dist/
+coverage/
+**/coverage/
+
+# Environment files
+.env
+.env.*
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Redis dump
+*.rdb
+dump.rdb
