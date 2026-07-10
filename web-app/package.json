@@ -3,7 +3,9 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently -n backend,frontend -c blue,green \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:frontend": "next dev",
+    "dev:backend": "powershell -NoProfile -ExecutionPolicy Bypass -File ../start-backend.ps1",
     "build": "next build",
     "start": "next start",
     "lint": "echo \"Add lint later\""
@@ -17,6 +19,7 @@
     "@types/node": "^20.14.10",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
+    "concurrently": "^9.0.0",
     "typescript": "^5.5.4"
   }
 }
