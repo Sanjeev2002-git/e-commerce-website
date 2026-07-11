@@ -11,6 +11,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const { totalCount } = useCart();
   const router = useRouter();
   const pathname = usePathname();
+  const isHome = pathname === "/";
   const searchParams = useSearchParams();
   const [query, setQuery] = useState("");
 
@@ -44,11 +45,15 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           <button type="submit">Search</button>
         </form>
         <nav className="top-nav">
+        {!isHome && (
+          <>
           <Link href="/categories">Categories</Link>
           <Link href="/products">Products</Link>
           <Link href="/orders">Orders</Link>
           <Link href="/wishlist">Wishlist</Link>
-          {user ? (
+          </>
+        )}
+        {user ? (
             <>
               {user.role !== "customer" && (
                 <Link href={`/${user.role}`} className="text-button">
@@ -62,7 +67,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           ) : (
             <Link href="/login">Sign in</Link>
           )}
+          {!isHome && (
           <Link href="/cart">Cart<span className="cart-badge">{totalCount}</span></Link>
+        )}
         </nav>
       </header>
 

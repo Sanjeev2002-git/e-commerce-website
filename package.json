@@ -11,7 +11,10 @@
     "delivery-app"
   ],
   "scripts": {
-    "dev": "npm run dev --prefix web-app",
+    "dev": "concurrently -n BACKEND,WEB -c blue,green \"npm:dev:backend\" \"npm:dev:web\"",
+    "dev:backend": "powershell -NoProfile -ExecutionPolicy Bypass -File ./start-backend.ps1",
+    "dev:web": "npm run dev --prefix web-app",
+    "dev:mobile": "npm run start --prefix mobile-app",
     "lint": "echo \"Run lint per package\"",
     "test": "echo \"Run tests per package\""
   },

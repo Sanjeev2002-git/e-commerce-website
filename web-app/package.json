@@ -3,9 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
-    "dev": "concurrently -n backend,frontend -c blue,green \"npm run dev:backend\" \"npm run dev:frontend\"",
-    "dev:frontend": "next dev",
-    "dev:backend": "powershell -NoProfile -ExecutionPolicy Bypass -File ../start-backend.ps1",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "echo \"Add lint later\""
